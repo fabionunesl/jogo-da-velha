@@ -1,31 +1,20 @@
 <?php
 
+require_once __DIR__ . '/constants.php';
+require_once __DIR__ . '/variables.php';
+require_once __DIR__ . '/getPlayersName.php';
+require_once __DIR__ . '/buildBoard.php';
+require_once __DIR__ . '/showBoard.php';
+
 do {
-    $playerOne = readline('Player 1 (X) - Digite seu nome: ');
-    $playerTwo = readline('Player 2 (0) - Digite seu nome: ');
+    $players = getPlayuersName();
+    $player = PLAYER_ONE_ICON;
 
-    $player = 'X';
-
-    $board = [
-        '.', '.', '.',
-        '.', '.', '.',
-        '.', '.', '.',
-
-    ];
+    $board = buildBoard();
 
     $winner = null;
     while ($winner === null) {
-        echo <<<EOL
-
-             Posições: | Tabuleiro
-                       |
-               0|1|2   |   $board[0]|$board[1]|$board[2]
-               3|4|5   |   $board[3]|$board[4]|$board[5]
-               6|7|8   |   $board[6]|$board[7]|$board[8]
-
-
-            EOL
-        ;
+        echo showBoard($board);
 
         $position = (int) readline("Player {player}, digite a sua posição: ");
 
@@ -78,17 +67,7 @@ do {
         }
     }
 
-    echo <<<EOL
-
-         Posições: | Tabuleiro
-                   |
-           0|1|2   |   $board[0]|$board[1]|$board[2]
-           3|4|5   |   $board[3]|$board[4]|$board[5]
-           6|7|8   |   $board[6]|$board[7]|$board[8]
-
-
-        EOL
-    ;
+    echo showBoard($board);
 
     if ($winner === 'X') {
         echo "VENCEDOR: {$playerOne}.\n";
