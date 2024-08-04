@@ -7,6 +7,10 @@ require_once __DIR__ . '/buildBoard.php';
 require_once __DIR__ . '/showBoard.php';
 require_once __DIR__ . '/isPositionCorrect.php';
 require_once __DIR__ . '/validate.php';
+require_once __DIR__ . '/isBoardFull.php';
+require_once __DIR__ . '/swapPlayer.php';
+
+
 
 do {
     $players = getPlayuersName();
@@ -33,15 +37,11 @@ do {
             $winner = null;
         }
 
-        if (!in_array('.', $board)) {
+        if (isBoardFull($board)) {
             break;
         }
 
-        if ($player === 'X') {
-            $player = 'O';
-        } else {
-            $player = 'X';
-        }
+        $player = swapPlayer($player);
     }
 
     echo showBoard($board);
