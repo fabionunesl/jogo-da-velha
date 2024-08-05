@@ -9,8 +9,8 @@ require_once __DIR__ . '/isPositionCorrect.php';
 require_once __DIR__ . '/validate.php';
 require_once __DIR__ . '/isBoardFull.php';
 require_once __DIR__ . '/swapPlayer.php';
-
-
+require_once __DIR__ . '/showWinner.php';
+require_once __DIR__ . '/playAgain.php';
 
 do {
     $players = getPlayuersName();
@@ -45,19 +45,9 @@ do {
     }
 
     echo showBoard($board);
+    echo showWinner($winner, $players);
 
-    if ($winner === 'X') {
-        echo "VENCEDOR: {$playerOne}.\n";
-    } elseif ($winner === 'O') {
-        echo "VENCEDOR: {$playerTwo}.\n";
-    } else {
-        echo "EMPATE.\n";
-    }
-
-    $playAgain = filter_var(
-        readline("\nDeseja jogar novamente? (true/false): "),
-        FILTER_VALIDATE_BOOLEAN
-    );
+    $playAgain = playAgain();
 
     echo "\n";
 
